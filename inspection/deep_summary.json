@@ -1,0 +1,661 @@
+{
+  "outer_files": 31,
+  "nested_records": 6101,
+  "nested_archives": 29,
+  "by_ext": {
+    ".fbx": 1370,
+    ".bin": 748,
+    ".gltf": 748,
+    ".obj": 599,
+    ".mtl": 595,
+    ".png": 383,
+    "": 314,
+    ".wav": 222,
+    ".uid": 130,
+    ".gd": 120,
+    ".tres": 117,
+    ".ogg": 114,
+    ".m4a": 108,
+    ".mp3": 108,
+    ".tscn": 76,
+    ".gdshader": 71,
+    ".import": 68,
+    ".svg": 37,
+    ".exr": 36,
+    ".txt": 26,
+    ".cs": 14,
+    ".jpg": 9,
+    ".glb": 9,
+    ".hdr": 8,
+    ".url": 8,
+    ".gdshaderinc": 7,
+    ".glsl": 7,
+    ".so": 6,
+    ".json": 4,
+    ".dll": 4,
+    ".res": 4,
+    ".blend": 3,
+    ".cfg": 3,
+    ".md": 2,
+    ".ptex": 2,
+    ".db": 2,
+    ".comp": 2,
+    ".dylib": 2,
+    ".wasm": 2,
+    ".py": 2
+  },
+  "by_bytes": {
+    ".png": 788424218,
+    ".wav": 255674170,
+    ".fbx": 181648548,
+    ".x86_64": 71047224,
+    ".bin": 35471440,
+    ".obj": 34221750,
+    ".glb": 33197436,
+    ".ogg": 32076484,
+    ".hdr": 24578387,
+    ".so": 20235348,
+    ".blend": 19732596,
+    ".pck": 18863288,
+    ".dll": 14650880,
+    ".res": 12304391,
+    ".exr": 11543201,
+    ".tga": 8388652,
+    ".jpg": 6701515,
+    ".wasm": 4300390,
+    ".debug": 3912616,
+    ".dylib": 3225160,
+    ".gltf": 3030118,
+    ".release": 2808120,
+    ".m4a": 2792147,
+    ".mp3": 2706992,
+    ".gd": 1213807,
+    ".tscn": 832957,
+    ".mtl": 362588,
+    ".db": 307200,
+    ".cs": 239471,
+    ".vsidx": 226353,
+    ".gdshader": 183536,
+    ".tres": 144677,
+    ".svg": 117427,
+    ".sqlite": 102400,
+    ".import": 64348,
+    ".glsl": 45794,
+    "": 37873,
+    ".ptex": 27097,
+    ".txt": 24516,
+    ".comp": 22603
+  },
+  "images_with_dimensions": 297,
+  "image_dimension_histogram": [
+    [
+      "2048x2048",
+      188
+    ],
+    [
+      "1024x1024",
+      43
+    ],
+    [
+      "512x512",
+      28
+    ],
+    [
+      "1921x1081",
+      12
+    ],
+    [
+      "1920x1080",
+      10
+    ],
+    [
+      "256x256",
+      5
+    ],
+    [
+      "128x128",
+      2
+    ],
+    [
+      "4096x4096",
+      2
+    ],
+    [
+      "1008x981",
+      2
+    ],
+    [
+      "16384x128",
+      2
+    ],
+    [
+      "1814x1292",
+      1
+    ],
+    [
+      "2000x2000",
+      1
+    ],
+    [
+      "4096x64",
+      1
+    ]
+  ],
+  "largest_nested_entries": [
+    {
+      "container": "assets/demo.zip",
+      "path": "demo.x86_64",
+      "bytes": 71047224,
+      "ext": ".x86_64",
+      "compressed": 27125926
+    },
+    {
+      "container": "assets/music/Magical Forest.zip",
+      "path": "wav/Nandor.wav",
+      "bytes": 44378460,
+      "ext": ".wav",
+      "compressed": 41106872
+    },
+    {
+      "container": "assets/music/Magical Forest.zip",
+      "path": "wav/Silivren.wav",
+      "bytes": 40552524,
+      "ext": ".wav",
+      "compressed": 37567646
+    },
+    {
+      "container": "assets/music/Magical Forest.zip",
+      "path": "wav/Elenariel.wav",
+      "bytes": 39938114,
+      "ext": ".wav",
+      "compressed": 36980747
+    },
+    {
+      "container": "assets/music/Magical Forest.zip",
+      "path": "wav/Lúthien.wav",
+      "bytes": 33179722,
+      "ext": ".wav",
+      "compressed": 30686961
+    },
+    {
+      "container": "assets/music/Magical Forest.zip",
+      "path": "wav/Aelindor.wav",
+      "bytes": 30722116,
+      "ext": ".wav",
+      "compressed": 28454853
+    },
+    {
+      "container": "assets/music/Magical Forest.zip",
+      "path": "wav/Caladwen.wav",
+      "bytes": 29493324,
+      "ext": ".wav",
+      "compressed": 27333635
+    },
+    {
+      "container": "assets/Universal Animation Library 2_Standard_(1).zip",
+      "path": "Universal Animation Library 2[Standard]/Unity/UAL2_Standard_RM.fbx",
+      "bytes": 24805740,
+      "ext": ".fbx",
+      "compressed": 5173667
+    },
+    {
+      "container": "assets/Universal Animation Library 2_Standard_(1).zip",
+      "path": "Universal Animation Library 2[Standard]/Unity/UAL2_Standard.fbx",
+      "bytes": 24778332,
+      "ext": ".fbx",
+      "compressed": 5141276
+    },
+    {
+      "container": "assets/Universal Animation Library_Standard_.zip",
+      "path": "Universal Animation Library[Standard]/Unity/UAL1_Standard_RM.fbx",
+      "bytes": 23767852,
+      "ext": ".fbx",
+      "compressed": 4794651
+    },
+    {
+      "container": "assets/Universal Animation Library_Standard_.zip",
+      "path": "Universal Animation Library[Standard]/Unity/UAL1_Standard.fbx",
+      "bytes": 23754684,
+      "ext": ".fbx",
+      "compressed": 4778109
+    },
+    {
+      "container": "assets/demo.zip",
+      "path": "demo.pck",
+      "bytes": 18863288,
+      "ext": ".pck",
+      "compressed": 13829004
+    },
+    {
+      "container": "(root)",
+      "path": "assets/Asimov Weapon Pack Release Version.fbx",
+      "bytes": 13341756,
+      "ext": ".fbx",
+      "header_hex": "4b617964617261204642582042696e6172792020001a00e81c00002308000000",
+      "header_text": "Kaydara FBX Binary  .......#............FBXHeade"
+    },
+    {
+      "container": "assets/Medieval Village MegaKit_Standard_.zip",
+      "path": "Medieval Village MegaKit[Standard]/Textures/T_BrushedNoise.png",
+      "bytes": 13059210,
+      "ext": ".png",
+      "compressed": 12777019
+    },
+    {
+      "container": "(root)",
+      "path": "assets/Vocations and Uniforms.blend",
+      "bytes": 12007884,
+      "ext": ".blend",
+      "header_hex": "424c454e4445522d7633303652454e444800000030e13f4d9200000000000000",
+      "header_text": "BLENDER-v306RENDH...0.?M....................Scen"
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Exports/glTF (Godot)/T_Dirt_Normal.png",
+      "bytes": 9650819,
+      "ext": ".png",
+      "compressed": 9653759,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA"
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Textures/T_Dirt_Normal.png",
+      "bytes": 9650819,
+      "ext": ".png",
+      "compressed": 9653759,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA"
+    },
+    {
+      "container": "assets/Guns&Explosives.rar",
+      "path": "Guns&Explosives/M24_Grenade/M24_Grenade_Normal_DirectX.png",
+      "bytes": 8497819,
+      "ext": ".png"
+    },
+    {
+      "container": "assets/plugins/SunshineClouds2-6.zip",
+      "path": "SunshineClouds2/addons/SunshineClouds2/NoiseTextures/curl_noise_varied.tga",
+      "bytes": 8388652,
+      "ext": ".tga",
+      "compressed": 7716247,
+      "width": 16384,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "container": "assets/Universal Animation Library 2_Standard_(1).zip",
+      "path": "Universal Animation Library 2[Standard]/Unreal-Godot/UAL2_Standard_RM.glb",
+      "bytes": 8095936,
+      "ext": ".glb",
+      "compressed": 3107092
+    },
+    {
+      "container": "assets/Universal Animation Library 2_Standard_(1).zip",
+      "path": "Universal Animation Library 2[Standard]/Unreal-Godot/UAL2_Standard.glb",
+      "bytes": 8091444,
+      "ext": ".glb",
+      "compressed": 3070596
+    },
+    {
+      "container": "assets/Universal Animation Library_Standard_.zip",
+      "path": "Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard_RM.glb",
+      "bytes": 7620504,
+      "ext": ".glb",
+      "compressed": 2753379
+    },
+    {
+      "container": "assets/Universal Animation Library_Standard_.zip",
+      "path": "Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb",
+      "bytes": 7618436,
+      "ext": ".glb",
+      "compressed": 2731956
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Exports/glTF (Godot)/T_RedBrick_Normal.png",
+      "bytes": 7273659,
+      "ext": ".png",
+      "compressed": 7275879,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA"
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Textures/T_RedBrick_Normal.png",
+      "bytes": 7273659,
+      "ext": ".png",
+      "compressed": 7275879,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA"
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Exports/glTF (Godot)/T_Ornaments_Normal.png",
+      "bytes": 7172215,
+      "ext": ".png",
+      "compressed": 7174400,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA"
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Textures/T_Ornaments_Normal.png",
+      "bytes": 7172215,
+      "ext": ".png",
+      "compressed": 7174400,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA"
+    },
+    {
+      "container": "assets/Guns&Explosives.rar",
+      "path": "Guns&Explosives/Shotgun/Shotgun_Normal_DirectX.png",
+      "bytes": 7018862,
+      "ext": ".png"
+    },
+    {
+      "container": "assets/Guns&Explosives.rar",
+      "path": "Guns&Explosives/Suomi_KP/Suomi_KP_Normal.png",
+      "bytes": 6718456,
+      "ext": ".png"
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Textures/Unreal-Normals/T_Ornaments_Normal.png",
+      "bytes": 6366344,
+      "ext": ".png",
+      "compressed": 6368212,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGB"
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Textures/Unreal-Normals/T_RedBrick_Normal.png",
+      "bytes": 6332588,
+      "ext": ".png",
+      "compressed": 6334518,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGB"
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Textures/Unreal-Normals/T_MarbleFloor_Normal.png",
+      "bytes": 6245811,
+      "ext": ".png",
+      "compressed": 6246555,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA"
+    },
+    {
+      "container": "assets/Guns&Explosives.rar",
+      "path": "Guns&Explosives/Luger/Luger_Normal_DirectX.png",
+      "bytes": 6098395,
+      "ext": ".png"
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Textures/CM_Lit_Interior_1.HDR",
+      "bytes": 6075827,
+      "ext": ".hdr",
+      "compressed": 4449053
+    },
+    {
+      "container": "assets/music/Magical Forest.zip",
+      "path": "ogg/Nandor.ogg",
+      "bytes": 6058296,
+      "ext": ".ogg",
+      "compressed": 6038513
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "path": "Textures/CM_Lit_Interior_2.HDR",
+      "bytes": 6034705,
+      "ext": ".hdr",
+      "compressed": 4139776
+    },
+    {
+      "container": "assets/Guns&Explosives.rar",
+      "path": "Guns&Explosives/Smoke_Grenade/Smoke_Grenade_Normal_DirectX.png",
+      "bytes": 6012054,
+      "ext": ".png"
+    },
+    {
+      "container": "assets/Guns&Explosives.rar",
+      "path": "Guns&Explosives/GreaseGun/Grease_Gun_Normal_DirectX.png",
+      "bytes": 5859248,
+      "ext": ".png"
+    },
+    {
+      "container": "assets/Stylized Nature MegaKit_Standard_.zip",
+      "path": "glTF/Bark_DeadTree_Normal.png",
+      "bytes": 5728199,
+      "ext": ".png",
+      "compressed": 5728199,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA"
+    },
+    {
+      "container": "assets/Stylized Nature MegaKit_Standard_.zip",
+      "path": "glTF/Bark_TwistedTree_Normal.png",
+      "bytes": 5728199,
+      "ext": ".png",
+      "compressed": 5728199,
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA"
+    }
+  ],
+  "archives": [
+    {
+      "container": "assets/Asimov Weapons Pack.zip",
+      "kind": "zip",
+      "entries": 3,
+      "uncompressed": 3594196,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Downtown City MegaKit_Standard_.zip",
+      "kind": "zip",
+      "entries": 697,
+      "uncompressed": 254214161,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Effects/BattleFXFree.zip",
+      "kind": "zip",
+      "entries": 47,
+      "uncompressed": 1763760,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Effects/DarkMagicFXFree.zip",
+      "kind": "zip",
+      "entries": 42,
+      "uncompressed": 1765498,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Effects/ElementalMagicFXFree.zip",
+      "kind": "zip",
+      "entries": 42,
+      "uncompressed": 1503785,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Effects/ExplosionFXFree.zip",
+      "kind": "zip",
+      "entries": 36,
+      "uncompressed": 1774679,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Effects/FlameFXFree.zip",
+      "kind": "zip",
+      "entries": 28,
+      "uncompressed": 1708017,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Effects/GodotBeamVFXFree.zip",
+      "kind": "zip",
+      "entries": 25,
+      "uncompressed": 34668,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Effects/HitFXFree.zip",
+      "kind": "zip",
+      "entries": 36,
+      "uncompressed": 150634,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Effects/MagicProjectilesVFX.zip",
+      "kind": "zip",
+      "entries": 169,
+      "uncompressed": 259839,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Guns&Explosives.rar",
+      "kind": "rar",
+      "entries": 135
+    },
+    {
+      "container": "assets/JDSherbert - Pixel UI SFX Pack (FREE).zip",
+      "kind": "zip",
+      "entries": 343,
+      "uncompressed": 4839166,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/JDSherbert - Sci Fi UI SFX Pack (FREE).zip",
+      "kind": "zip",
+      "entries": 163,
+      "uncompressed": 32134414,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/JDSherbert - Wooden UI SFX Pack (FREE).zip",
+      "kind": "zip",
+      "entries": 73,
+      "uncompressed": 8698864,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/KayKit_FantasyWeaponsBits_1.0_FREE.zip",
+      "kind": "zip",
+      "entries": 203,
+      "uncompressed": 6177289,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/KayKit_HalloweenBits_1.0_FREE.zip",
+      "kind": "zip",
+      "entries": 409,
+      "uncompressed": 9518045,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/KayKit_RPGToolsBits_1.0_FREE.zip",
+      "kind": "zip",
+      "entries": 346,
+      "uncompressed": 7064764,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Low Poly Weapon Pack - by Kickin It Studios.zip",
+      "kind": "zip",
+      "entries": 39,
+      "uncompressed": 2613159,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Medieval Village MegaKit_Standard_.zip",
+      "kind": "zip",
+      "entries": 942,
+      "uncompressed": 174347235,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Modular SciFi MegaKit_Standard_.zip",
+      "kind": "zip",
+      "entries": 1195,
+      "uncompressed": 64822507,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Stylized Nature MegaKit_Standard_.zip",
+      "kind": "zip",
+      "entries": 459,
+      "uncompressed": 122116746,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Universal Animation Library 2_Standard_(1).zip",
+      "kind": "zip",
+      "entries": 19,
+      "uncompressed": 72807306,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Universal Animation Library_Standard_.zip",
+      "kind": "zip",
+      "entries": 12,
+      "uncompressed": 63648179,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/Universal Base Characters_Standard_.zip",
+      "kind": "zip",
+      "entries": 128,
+      "uncompressed": 132571039,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/demo.zip",
+      "kind": "zip",
+      "entries": 2,
+      "uncompressed": 89910512,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/music/Magical Forest.zip",
+      "kind": "zip",
+      "entries": 13,
+      "uncompressed": 247578377,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/plugins/SunshineClouds2-6.zip",
+      "kind": "zip",
+      "entries": 99,
+      "uncompressed": 14220364,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/plugins/Terrain3D_v1.1.0-stable-4.zip",
+      "kind": "zip",
+      "entries": 262,
+      "uncompressed": 86235875,
+      "testzip_first_bad": null
+    },
+    {
+      "container": "assets/plugins/assets2godot_v0.8.2_nobin.zip",
+      "kind": "zip",
+      "entries": 132,
+      "uncompressed": 845273,
+      "testzip_first_bad": null
+    }
+  ]
+}
