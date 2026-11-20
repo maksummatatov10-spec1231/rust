@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Forest Bloom — Rust/WASM</title>
+<style>
+  :root { color-scheme: dark; font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    background: radial-gradient(circle at 50% -20%, #1d4032 0%, #0b1714 55%, #050b09 100%);
+    color: #e8f6e9; padding: 18px;
+  }
+  .wrap { width: min(960px, 100%); }
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
+  h1 { font-size: clamp(20px, 3vw, 30px); margin: 0; letter-spacing: .5px; }
+  h1 span { color: #8fe08a; }
+  .badge { font-size: 12px; color: #9bb9a6; border: 1px solid #315241; border-radius: 999px; padding: 5px 11px; }
+  .hud {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+  .hud div {
+    background: rgba(12, 35, 27, .72); border: 1px solid #254e3c; border-radius: 10px;
+    padding: 7px 10px; font-size: 13px; color: #a8c9b1;
+  }
+  .hud b { display: block; font-size: 19px; color: #f1fff0; line-height: 1.25; }
+  .stage { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid #2e5b45; box-shadow: 0 24px 70px #0009, inset 0 0 0 1px #ffffff0a; background: #0a1a14; }
+  canvas { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; touch-action: none; cursor: crosshair; }
+  .overlay {
+    position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
+    background: linear-gradient(#06120dcc, #06120dee); backdrop-filter: blur(3px);
+  }
+  .overlay.hidden { display: none; }
+  .card { max-width: 520px; padding: 26px; }
+  .card h2 { margin: 0 0 8px; font-size: clamp(26px, 5vw, 44px); }
+  .card h2 em { color: #a5e887; font-style: normal; }
+  .card p { color: #b7d3bd; line-height: 1.55; margin: 8px 0 20px; }
+  .keys { font-size: 13px; color: #8fb49a; margin-top: 14px; }
+  button {
+    font: inherit; font-weight: 700; cursor: pointer; color: #062015;
+    background: linear-gradient(#b7f08a, #6fc46b); border: 0; border-radius: 999px;
+    padding: 12px 30px; box-shadow: 0 8px 30px #6fc46b44;
+  }
+  button:hover { filter: brightness(1.08); }
+  footer { margin-top: 10px; font-size: 12px; color: #738f7d; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Forest <span>Bloom</span></h1>
+    <div class="badge">Rust 1.97 → WebAssembly · без внешних crates</div>
+  </header>
+  <div class="hud">
+    <div>Очки<b id="score">0</b></div>
+    <div>Жизни<b id="lives">3</b></div>
+    <div>Уровень<b id="level">1</b></div>
+    <div>Время<b id="time">0:00</b></div>
+    <div>Победы<b id="kills">0</b></div>
+  </div>
+  <div class="stage">
+    <canvas id="game" width="960" height="600"></canvas>
+    <div class="overlay" id="overlay">
+      <div class="card">
+        <h2>Лес расцветает, <em>но тени крадутся</em></h2>
+        <p>Собирай волшебные цветы, подбирай грибы, чтобы восстановить здоровье и сбивай тени листьями. Каждые 22 секунды мир становится быстрее.</p>
+        <button id="startBtn">Начать игру</button>
+        <div class="keys">WASD / стрелки — движение · мышь или пробел — выстрел · P — пауза</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <span>Ассеты: Stylized Nature MegaKit, KayKit Bits, BinbunVFX, JDSherbert SFX</span>
+    <span>Логика: <code>game/src/lib.rs</code></span>
+  </footer>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
