@@ -121,6 +121,27 @@ fn add_foe(kind: i32, x: f32, z: f32) {
 }
 
 #[no_mangle]
+pub extern "C" fn init_game() {
+    unsafe {
+        P = Player::new();
+        NFOES = 0;
+        NEVENTS = 0;
+        G.mode = 0;
+        G.score = 0;
+        G.wave = 1;
+        G.kills = 0;
+        G.time = 0.0;
+        G.spawn = 1.0;
+        G.attack_cd = 0.0;
+        G.invuln = 0.0;
+        G.shake = 0.0;
+        G.hit_marker = 0.0;
+        G.damage_flash = 0.0;
+        G.picked = 0;
+    }
+}
+
+#[no_mangle]
 pub extern "C" fn reset_game() {
     unsafe {
         P = Player::new();

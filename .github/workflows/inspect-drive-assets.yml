@@ -1,4 +1,5 @@
 name: Inspect Drive assets
+# rebuild on gameplay source fixes
 
 on:
   push:
