@@ -1,0 +1,10 @@
+[package]
+name = "forest-bloom-native"
+version = "1.0.0"
+edition = "2021"
+
+[profile.release]
+opt-level = 2
+panic = "abort"
+strip = true
+lto = true

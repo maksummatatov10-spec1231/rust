@@ -406,6 +406,22 @@ jobs:
             --repo "${{ github.repository }}" --clobber
           gh release view forest-bloom-3d-v1 --repo "${{ github.repository }}" --json assets
 
+      - name: Build native Windows executable
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo apt-get install -y -qq mingw-w64
+          export PATH="$HOME/.cargo/bin:$PATH"
+          rustup target add x86_64-pc-windows-gnu
+          cd native
+          cargo build --release --target x86_64-pc-windows-gnu
+          cp target/x86_64-pc-windows-gnu/release/forest-bloom-native.exe /tmp/ForestBloomNative.exe
+          cd ..
+          gh release upload forest-bloom-3d-v1 \
+            /tmp/ForestBloomNative.exe \
+            --repo "${{ github.repository }}" --clobber
+          gh release view forest-bloom-3d-v1 --repo "${{ github.repository }}" --json assets
+
       - name: Commit inventory to branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
