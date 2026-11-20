@@ -105,6 +105,125 @@ jobs:
           print(json.dumps(summary, ensure_ascii=False, indent=2)[:12000])
           PY
 
+      - name: Deep inventory of every nested archive
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq p7zip-full
+          mkdir -p /tmp/assets_extracted
+          unzip -q -o /tmp/assets.zip -d /tmp/assets_extracted
+          python - <<'PY'
+          import os, io, json, gzip, zipfile, subprocess, collections
+          from pathlib import Path
+          from PIL import Image
+
+          root = Path('/tmp/assets_extracted')
+          records = []
+          archive_summaries = []
+
+          def image_meta(name, data):
+              ext = os.path.splitext(name)[1].lower()
+              if ext not in {'.png', '.jpg', '.jpeg', '.webp', '.bmp', '.gif', '.tga'}:
+                  return {}
+              if len(data) > 12_000_000:
+                  return {}
+              try:
+                  with Image.open(io.BytesIO(data)) as im:
+                      return {'width': im.size[0], 'height': im.size[1], 'mode': im.mode}
+              except Exception:
+                  return {}
+
+          def add_entry(container, name, size, compressed=None, extra=None):
+              ext = os.path.splitext(name)[1].lower()
+              rec = {
+                  'container': str(container),
+                  'path': name,
+                  'bytes': size,
+                  'ext': ext,
+              }
+              if compressed is not None:
+                  rec['compressed'] = compressed
+              if extra:
+                  rec.update(extra)
+              records.append(rec)
+              return rec
+
+          files = sorted(p for p in root.rglob('*') if p.is_file())
+          for path in files:
+              rel = str(path.relative_to(root))
+              size = path.stat().st_size
+              ext = path.suffix.lower()
+              if ext == '.zip':
+                  try:
+                      with zipfile.ZipFile(path) as z:
+                          bad = z.testzip()
+                          for info in z.infolist():
+                              meta = None
+                              if not info.is_dir() and info.file_size < 12_000_000:
+                                  meta = image_meta(info.filename, z.read(info))
+                              add_entry(rel, info.filename, info.file_size, info.compress_size, meta)
+                          archive_summaries.append({
+                              'container': rel, 'kind': 'zip', 'entries': len(z.infolist()),
+                              'uncompressed': sum(i.file_size for i in z.infolist()),
+                              'testzip_first_bad': bad,
+                          })
+                  except Exception as exc:
+                      archive_summaries.append({'container': rel, 'kind': 'zip', 'error': str(exc)})
+              elif ext in {'.rar', '.7z'}:
+                  try:
+                      out = subprocess.run(
+                          ['7z', 'l', '-slt', str(path)],
+                          check=True, capture_output=True, text=True, timeout=300,
+                      ).stdout
+                      cur = {}
+                      count = 0
+                      for line in out.splitlines():
+                          if line.strip() == '':
+                              if cur.get('Path'):
+                                  add_entry(rel, cur['Path'], int(cur.get('Size', 0) or 0))
+                                  count += 1
+                                  cur = {}
+                          elif ' = ' in line:
+                              k, v = line.split(' = ', 1)
+                              cur[k.strip()] = v.strip()
+                      if cur.get('Path'):
+                          add_entry(rel, cur['Path'], int(cur.get('Size', 0) or 0))
+                          count += 1
+                      archive_summaries.append({'container': rel, 'kind': ext[1:], 'entries': count})
+                  except Exception as exc:
+                      archive_summaries.append({'container': rel, 'kind': ext[1:], 'error': str(exc)})
+              else:
+                  extra = {}
+                  if ext in {'.blend', '.fbx'}:
+                      with open(path, 'rb') as f:
+                          head = f.read(64)
+                      extra['header_hex'] = head[:32].hex()
+                      extra['header_text'] = ''.join(chr(b) if 32 <= b < 127 else '.' for b in head[:48])
+                  add_entry('(root)', rel, size, extra=extra)
+
+          by_ext = collections.Counter(r['ext'] for r in records)
+          by_bytes = collections.Counter()
+          for r in records:
+              by_bytes[r['ext']] += r['bytes']
+          images = [r for r in records if 'width' in r]
+          summary = {
+              'outer_files': len(files),
+              'nested_records': len(records),
+              'nested_archives': len(archive_summaries),
+              'by_ext': dict(by_ext.most_common(40)),
+              'by_bytes': dict(by_bytes.most_common(40)),
+              'images_with_dimensions': len(images),
+              'image_dimension_histogram': collections.Counter(f"{r['width']}x{r['height']}" for r in images).most_common(40),
+              'largest_nested_entries': sorted(records, key=lambda r: -r['bytes'])[:40],
+              'archives': archive_summaries,
+          }
+          with open('inspection/deep_summary.json', 'w', encoding='utf-8') as f:
+              json.dump(summary, f, ensure_ascii=False, indent=2)
+          with gzip.open('deep_inventory.json.gz', 'wt', encoding='utf-8') as f:
+              json.dump(records, f, ensure_ascii=False, separators=(',', ':'))
+          print('deep records:', len(records), 'archives:', len(archive_summaries), 'images:', len(images))
+          print(json.dumps(summary, ensure_ascii=False, indent=2)[:10000])
+          PY
+
       - name: Commit inventory to branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -112,7 +231,7 @@ jobs:
           git config user.name "arena-agent"
           git config user.email "agent@arena.ai"
           git checkout -B "$GITHUB_REF_NAME"
-          git add -f inspection inventory.json
+          git add -f inspection inventory.json deep_inventory.json.gz
           git commit -m "Add full asset inventory" || echo "No inventory changes"
           git push origin "HEAD:$GITHUB_REF_NAME"
 
