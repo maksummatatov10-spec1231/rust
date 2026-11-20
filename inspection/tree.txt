@@ -1,0 +1,35 @@
+           0  assets/
+     3731251  assets/JDSherbert - Pixel UI SFX Pack (FREE).zip
+     5441436  assets/JDSherbert - Wooden UI SFX Pack (FREE).zip
+    26292628  assets/JDSherbert - Sci Fi UI SFX Pack (FREE).zip
+    40955214  assets/demo.zip
+    15904933  assets/Universal Animation Library_Standard_.zip
+   128968391  assets/Universal Base Characters_Standard_.zip
+    18735003  assets/Universal Animation Library 2_Standard_(1).zip
+   104088529  assets/Stylized Nature MegaKit_Standard_.zip
+           0  assets/plugins/
+    45665295  assets/plugins/Terrain3D_v1.1.0-stable-4.zip
+      306749  assets/plugins/assets2godot_v0.8.2_nobin.zip
+    12830265  assets/plugins/SunshineClouds2-6.zip
+     3375694  assets/KayKit_FantasyWeaponsBits_1.0_FREE.zip
+   161003471  assets/Medieval Village MegaKit_Standard_.zip
+    48559316  assets/Modular SciFi MegaKit_Standard_.zip
+     5646004  assets/KayKit_HalloweenBits_1.0_FREE.zip
+   234753092  assets/Downtown City MegaKit_Standard_.zip
+     3885168  assets/KayKit_RPGToolsBits_1.0_FREE.zip
+   162200198  assets/Guns&Explosives.rar
+     2090335  assets/Low Poly Weapon Pack - by Kickin It Studios.zip
+    12007884  assets/Vocations and Uniforms.blend
+           0  assets/Effects/
+      987865  assets/Effects/FlameFXFree.zip
+      938922  assets/Effects/ElementalMagicFXFree.zip
+       40460  assets/Effects/HitFXFree.zip
+     1009313  assets/Effects/BattleFXFree.zip
+      999784  assets/Effects/ExplosionFXFree.zip
+       13680  assets/Effects/GodotBeamVFXFree.zip
+      116107  assets/Effects/MagicProjectilesVFX.zip
+     1004974  assets/Effects/DarkMagicFXFree.zip
+      601604  assets/Asimov Weapons Pack.zip
+    13341756  assets/Asimov Weapon Pack Release Version.fbx
+           0  assets/music/
+   231357658  assets/music/Magical Forest.zip

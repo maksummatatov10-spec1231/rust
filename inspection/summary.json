@@ -1,0 +1,345 @@
+{
+  "archive": "/tmp/assets.zip",
+  "archive_bytes": 1264737618,
+  "entries": 35,
+  "files": 31,
+  "dirs": 4,
+  "total_uncompressed_bytes": 1286852979,
+  "by_ext_counts": {
+    ".zip": 28,
+    ".rar": 1,
+    ".blend": 1,
+    ".fbx": 1
+  },
+  "by_ext_bytes": {
+    ".zip": 1099303141,
+    ".rar": 162200198,
+    ".fbx": 13341756,
+    ".blend": 12007884,
+    "": 0
+  },
+  "top_20_files": [
+    {
+      "path": "assets/Downtown City MegaKit_Standard_.zip",
+      "is_dir": false,
+      "bytes": 234753092,
+      "compressed": 234620786,
+      "ext": ".zip",
+      "crc32": "f564c892",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        37,
+        28
+      ]
+    },
+    {
+      "path": "assets/music/Magical Forest.zip",
+      "is_dir": false,
+      "bytes": 231357658,
+      "compressed": 231427920,
+      "ext": ".zip",
+      "crc32": "3cd504c5",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        50,
+        50
+      ]
+    },
+    {
+      "path": "assets/Guns&Explosives.rar",
+      "is_dir": false,
+      "bytes": 162200198,
+      "compressed": 162204734,
+      "ext": ".rar",
+      "crc32": "84f6fe35",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        39,
+        4
+      ]
+    },
+    {
+      "path": "assets/Medieval Village MegaKit_Standard_.zip",
+      "is_dir": false,
+      "bytes": 161003471,
+      "compressed": 160708961,
+      "ext": ".zip",
+      "crc32": "09b94f40",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        35,
+        24
+      ]
+    },
+    {
+      "path": "assets/Universal Base Characters_Standard_.zip",
+      "is_dir": false,
+      "bytes": 128968391,
+      "compressed": 128932345,
+      "ext": ".zip",
+      "crc32": "7f08a59d",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        27,
+        18
+      ]
+    },
+    {
+      "path": "assets/Stylized Nature MegaKit_Standard_.zip",
+      "is_dir": false,
+      "bytes": 104088529,
+      "compressed": 104036972,
+      "ext": ".zip",
+      "crc32": "810ed81d",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        28,
+        8
+      ]
+    },
+    {
+      "path": "assets/Modular SciFi MegaKit_Standard_.zip",
+      "is_dir": false,
+      "bytes": 48559316,
+      "compressed": 48184134,
+      "ext": ".zip",
+      "crc32": "3c53a95f",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        36,
+        6
+      ]
+    },
+    {
+      "path": "assets/plugins/Terrain3D_v1.1.0-stable-4.zip",
+      "is_dir": false,
+      "bytes": 45665295,
+      "compressed": 45491769,
+      "ext": ".zip",
+      "crc32": "513e6c3e",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        30,
+        34
+      ]
+    },
+    {
+      "path": "assets/demo.zip",
+      "is_dir": false,
+      "bytes": 40955214,
+      "compressed": 40913484,
+      "ext": ".zip",
+      "crc32": "b4f2f208",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        39,
+        36
+      ]
+    },
+    {
+      "path": "assets/JDSherbert - Sci Fi UI SFX Pack (FREE).zip",
+      "is_dir": false,
+      "bytes": 26292628,
+      "compressed": 26266396,
+      "ext": ".zip",
+      "crc32": "e93afb58",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        25,
+        12
+      ]
+    },
+    {
+      "path": "assets/Universal Animation Library 2_Standard_(1).zip",
+      "is_dir": false,
+      "bytes": 18735003,
+      "compressed": 18470042,
+      "ext": ".zip",
+      "crc32": "be5fdfce",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        27,
+        30
+      ]
+    },
+    {
+      "path": "assets/Universal Animation Library_Standard_.zip",
+      "is_dir": false,
+      "bytes": 15904933,
+      "compressed": 15692250,
+      "ext": ".zip",
+      "crc32": "eee15060",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        26,
+        28
+      ]
+    },
+    {
+      "path": "assets/Asimov Weapon Pack Release Version.fbx",
+      "is_dir": false,
+      "bytes": 13341756,
+      "compressed": 2194512,
+      "ext": ".fbx",
+      "crc32": "8a2e502d",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        48,
+        56
+      ]
+    },
+    {
+      "path": "assets/plugins/SunshineClouds2-6.zip",
+      "is_dir": false,
+      "bytes": 12830265,
+      "compressed": 12813351,
+      "ext": ".zip",
+      "crc32": "e7cbd29c",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        33,
+        42
+      ]
+    },
+    {
+      "path": "assets/Vocations and Uniforms.blend",
+      "is_dir": false,
+      "bytes": 12007884,
+      "compressed": 3100384,
+      "ext": ".blend",
+      "crc32": "99d272d7",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        42,
+        16
+      ]
+    },
+    {
+      "path": "assets/KayKit_HalloweenBits_1.0_FREE.zip",
+      "is_dir": false,
+      "bytes": 5646004,
+      "compressed": 5558978,
+      "ext": ".zip",
+      "crc32": "aa26b9f1",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        37,
+        38
+      ]
+    },
+    {
+      "path": "assets/JDSherbert - Wooden UI SFX Pack (FREE).zip",
+      "is_dir": false,
+      "bytes": 5441436,
+      "compressed": 5430783,
+      "ext": ".zip",
+      "crc32": "0f4dab9b",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        24,
+        56
+      ]
+    },
+    {
+      "path": "assets/KayKit_RPGToolsBits_1.0_FREE.zip",
+      "is_dir": false,
+      "bytes": 3885168,
+      "compressed": 3786931,
+      "ext": ".zip",
+      "crc32": "515cef38",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        37,
+        40
+      ]
+    },
+    {
+      "path": "assets/JDSherbert - Pixel UI SFX Pack (FREE).zip",
+      "is_dir": false,
+      "bytes": 3731251,
+      "compressed": 3640415,
+      "ext": ".zip",
+      "crc32": "0af393d2",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        24,
+        30
+      ]
+    },
+    {
+      "path": "assets/KayKit_FantasyWeaponsBits_1.0_FREE.zip",
+      "is_dir": false,
+      "bytes": 3375694,
+      "compressed": 3325530,
+      "ext": ".zip",
+      "crc32": "289e4ef6",
+      "date_time": [
+        2026,
+        11,
+        15,
+        16,
+        34,
+        34
+      ]
+    }
+  ],
+  "image_count": 0,
+  "image_dimensions": []
+}
