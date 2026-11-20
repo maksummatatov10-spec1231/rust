@@ -127,10 +127,10 @@
     grad.addColorStop(1, '#1c3c29');
     g.fillStyle = grad;
     g.fillRect(0, 0, 512, 512);
-    if (images.grass) {
+    if (images['grass.png']) {
       g.globalAlpha = 0.22;
       for (let i = 0; i < 16; i++) {
-        g.drawImage(images.grass, (i * 131) % 512, (i * 197) % 512, 128, 128);
+        g.drawImage(images['grass.png'], (i * 131) % 512, (i * 197) % 512, 128, 128);
       }
       g.globalAlpha = 1;
     }
@@ -244,8 +244,11 @@
     });
   }
 
-  function prepModel(gltf, targetHeight) {
-    const root = gltf.scene;
+  function prepModel(source, targetHeight) {
+    const original = (source && source.scene) ? source.scene : source;
+    if (!original) return new THREE.Group();
+    // Always clone: the cached model must stay untouched for later instances.
+    const root = original.clone(true);
     root.traverse((o) => {
       if (o.isMesh) {
         o.castShadow = true;
@@ -287,7 +290,7 @@
     for (let i = 0; i < count && trees.length; i++) {
       const a = seeded(i * 3 + 1) * Math.PI * 2;
       const r = 9 + Math.sqrt(seeded(i * 3 + 2)) * 38;
-      const obj = prepModel(models[pick(trees, i)].clone(true), 5 + seeded(i * 9) * 4);
+      const obj = prepModel(models[pick(trees, i)], 5 + seeded(i * 9) * 4);
       obj.position.set(Math.cos(a) * r, 0, Math.sin(a) * r);
       obj.rotation.y = seeded(i * 13) * 6.28;
       obj.updateMatrix();
@@ -299,7 +302,7 @@
       const a = seeded(i * 5 + 41) * Math.PI * 2;
       const r = 3 + Math.sqrt(seeded(i * 5 + 42)) * 40;
       const path = pick(small, i + 100);
-      const obj = prepModel(models[path].clone(true), /Mushroom/.test(path) ? 0.7 : 0.45 + seeded(i * 17) * 0.6);
+      const obj = prepModel(models[path], /Mushroom/.test(path) ? 0.7 : 0.45 + seeded(i * 17) * 0.6);
       obj.position.set(Math.cos(a) * r, 0, Math.sin(a) * r);
       obj.rotation.y = seeded(i * 23) * 6.28;
       obj.updateMatrix();
@@ -308,7 +311,7 @@
     }
     for (let i = 0; i < Math.min(5, ruins.length); i++) {
       const a = (i / 5) * Math.PI * 2 + 0.6;
-      const obj = prepModel(models[ruins[i]].clone(true), 2.4);
+      const obj = prepModel(models[ruins[i]], 2.4);
       obj.position.set(Math.cos(a) * 15, 0, Math.sin(a) * 15);
       obj.rotation.y = a;
       scene.add(obj);
@@ -361,7 +364,7 @@
     const path = (models.manifest.models.find((p) => p.includes('sword_A.gltf')));
     let blade;
     if (path && models[path]) {
-      blade = prepModel(models[path].clone(true), 1.05);
+      blade = prepModel(models[path], 1.05);
     } else {
       blade = new THREE.Group();
       const b = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.95, 0.035),
@@ -396,7 +399,7 @@
     const paths = models.manifest.models.filter((p) => p.includes('/characters/'));
     let g;
     if (paths.length && models[paths[i % paths.length]]) {
-      g = prepModel(models[paths[i % paths.length]].clone(true), 1.85);
+      g = prepModel(models[paths[i % paths.length]], 1.85);
       g.traverse((o) => {
         if (o.isMesh && o.material) {
           o.material = o.material.clone();

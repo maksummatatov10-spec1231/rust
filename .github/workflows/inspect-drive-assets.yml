@@ -1,5 +1,5 @@
 name: Inspect Drive assets
-# rebuild on gameplay source fixes
+# rebuild/upload the playable release whenever gameplay or rendering sources change
 
 on:
   push:
@@ -7,6 +7,10 @@ on:
       - arena/1c256bb7-rust
     paths:
       - '.github/workflows/inspect-drive-assets.yml'
+      - 'game3d/main.js'
+      - 'game3d/src/lib.rs'
+      - 'game3d/core.wasm'
+      - 'game3d/index.html'
   workflow_dispatch:
     inputs:
       file_id:
