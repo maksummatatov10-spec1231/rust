@@ -224,6 +224,63 @@ jobs:
           print(json.dumps(summary, ensure_ascii=False, indent=2)[:10000])
           PY
 
+      - name: Extract curated game assets
+        run: |
+          python - <<'PY'
+          import zipfile, shutil
+          from pathlib import Path
+
+          root = Path('/tmp/assets_extracted')
+          out = Path('game/assets')
+          out.mkdir(parents=True, exist_ok=True)
+
+          picks = {
+              'assets/Stylized Nature MegaKit_Standard_.zip': {
+                  'Textures/Grass.png': 'grass.png',
+                  'Textures/Flowers.png': 'flowers.png',
+                  'Textures/Mushrooms.png': 'mushrooms.png',
+                  'Textures/Leaves_NormalTree.png': 'leaves.png',
+                  'Textures/PathRocks_Diffuse.png': 'rocks.png',
+              },
+              'assets/KayKit_FantasyWeaponsBits_1.0_FREE.zip': {
+                  'KayKit_FantasyWeaponsBits_1.0_FREE/Textures/weapons_bits_texture.png': 'weapons.png',
+              },
+              'assets/KayKit_HalloweenBits_1.0_FREE.zip': {
+                  'KayKit_HalloweenBits_1.0_FREE/Assets/textures/halloweenbits_texture.png': 'halloween.png',
+              },
+              'assets/KayKit_RPGToolsBits_1.0_FREE.zip': {
+                  'KayKit_RPGToolsBits_1.0_FREE/Textures/tools_bits_texture.png': 'tools.png',
+              },
+              'assets/Effects/BattleFXFree.zip': {
+                  'BattleFXFree/assets/BinbunVFX_Vol2/BattleFX/icons/leaf.png': 'leaf.png',
+              },
+              'assets/JDSherbert - Pixel UI SFX Pack (FREE).zip': {
+                  'JDSherbert - Pixel UI SFX Pack (FREE)/Mono/ogg/JDSherbert - Pixel UI SFX Pack - Select 1 (Sine).ogg': 'sfx_select.ogg',
+                  'JDSherbert - Pixel UI SFX Pack (FREE)/Mono/ogg/JDSherbert - Pixel UI SFX Pack - Popup Open 1 (Sine).ogg': 'sfx_confirm.ogg',
+                  'JDSherbert - Pixel UI SFX Pack (FREE)/Mono/ogg/JDSherbert - Pixel UI SFX Pack - Error 1 (Sine).ogg': 'sfx_error.ogg',
+              },
+              'assets/JDSherbert - Sci Fi UI SFX Pack (FREE).zip': {
+                  'JDSherbert - Sci Fi UI SFX Pack (FREE)/Mono/ogg/JDSherbert - Sci Fi UI SFX Pack - Swipe - 1.ogg': 'sfx_shoot.ogg',
+                  'JDSherbert - Sci Fi UI SFX Pack (FREE)/Mono/ogg/JDSherbert - Sci Fi UI SFX Pack - Error - 1.ogg': 'sfx_hit.ogg',
+                  'JDSherbert - Sci Fi UI SFX Pack (FREE)/Mono/ogg/JDSherbert - Sci Fi UI SFX Pack - Popup Open - 1.ogg': 'sfx_start.ogg',
+              },
+          }
+
+          copied = []
+          for container, mapping in picks.items():
+              with zipfile.ZipFile(root / container) as z:
+                  for src, dst in mapping.items():
+                      if src not in z.namelist():
+                          print('MISSING', container, src)
+                          continue
+                      with z.open(src) as f, open(out / dst, 'wb') as g:
+                          shutil.copyfileobj(f, g)
+                      copied.append(dst)
+          print('copied:', copied)
+          for p in sorted(out.iterdir()):
+              print(f'{p.stat().st_size:>9} {p.name}')
+          PY
+
       - name: Commit inventory to branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -231,7 +288,7 @@ jobs:
           git config user.name "arena-agent"
           git config user.email "agent@arena.ai"
           git checkout -B "$GITHUB_REF_NAME"
-          git add -f inspection inventory.json deep_inventory.json.gz
+          git add -f inspection inventory.json deep_inventory.json.gz game/assets
           git commit -m "Add full asset inventory" || echo "No inventory changes"
           git push origin "HEAD:$GITHUB_REF_NAME"
 
