@@ -351,14 +351,27 @@ jobs:
               dst.write_bytes(z.read(src))
               print('animation glb:', dst.stat().st_size)
 
-          # A few medieval ruins for variety.
-          with zipfile.ZipFile(root / 'assets/Medieval Village MegaKit_Standard_.zip') as z:
-              candidates = [n for n in z.namelist() if n.endswith('.gltf') and 'glTF' in n]
-              for name in candidates[:6]:
-                  dst = out / 'ruins' / name
-                  dst.parent.mkdir(parents=True, exist_ok=True)
-                  dst.write_bytes(z.read(name))
-              print('ruins gltf:', len(candidates[:6]))
+          # Fix two textures whose glTF uri differs from the stored filename.
+          with zipfile.ZipFile(root / 'assets/Universal Base Characters_Standard_.zip') as z:
+              base = 'Universal Base Characters[Standard]/Base Characters/Godot - UE/'
+              dest = out / 'characters' / base
+              for src, dst in [
+                  ('T_Eye_Normal.png', 'T_Eye_Normal_png.png'),
+                  ('T_Hair_1_Normal.png', 'T_Hair_1_Normal_png.png'),
+              ]:
+                  (dest / dst).write_bytes(z.read(base + src))
+
+          # A few medieval ruins for variety, with their buffers/textures.
+          import shutil
+          shutil.rmtree(out / 'ruins', ignore_errors=True)
+          ruins = [
+              'Medieval Village MegaKit[Standard]/glTF/Prop_Crate.gltf',
+              'Medieval Village MegaKit[Standard]/glTF/Prop_Wagon.gltf',
+              'Medieval Village MegaKit[Standard]/glTF/Wall_Arch.gltf',
+              'Medieval Village MegaKit[Standard]/glTF/Prop_WoodenFence_Single.gltf',
+              'Medieval Village MegaKit[Standard]/glTF/Stairs_Exterior_Straight.gltf',
+          ]
+          copy_gltf_pack('assets/Medieval Village MegaKit_Standard_.zip', ruins, 'ruins')
           PY
 
       - name: Commit inventory to branch
