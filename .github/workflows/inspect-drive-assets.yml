@@ -281,6 +281,86 @@ jobs:
               print(f'{p.stat().st_size:>9} {p.name}')
           PY
 
+      - name: Extract 3D assets for the FPS
+        run: |
+          python - <<'PY'
+          import json, zipfile, posixpath
+          from pathlib import Path
+
+          root = Path('/tmp/assets_extracted')
+          out = Path('game3d/models')
+
+          def copy_gltf_pack(container, paths, dest):
+              z = zipfile.ZipFile(root / container)
+              names = set(z.namelist())
+              needed = set(paths)
+              for gltf in paths:
+                  data = json.loads(z.read(gltf))
+                  for section in ('buffers', 'images'):
+                      for item in data.get(section, []):
+                          uri = item.get('uri')
+                          if uri and not uri.startswith('data:'):
+                              needed.add(posixpath.normpath(posixpath.join(posixpath.dirname(gltf), uri)))
+              copied = 0
+              for name in sorted(needed):
+                  if name not in names:
+                      print('MISSING', container, name)
+                      continue
+                  target = out / dest / name
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  with z.open(name) as src, open(target, 'wb') as dst:
+                      dst.write(src.read())
+                  copied += 1
+              print(container, '->', dest, 'files:', copied)
+
+          nature = [
+              'glTF/CommonTree_1.gltf', 'glTF/CommonTree_2.gltf', 'glTF/CommonTree_3.gltf',
+              'glTF/CommonTree_4.gltf', 'glTF/CommonTree_5.gltf',
+              'glTF/Pine_1.gltf', 'glTF/Pine_2.gltf', 'glTF/Pine_3.gltf',
+              'glTF/Pine_4.gltf', 'glTF/Pine_5.gltf',
+              'glTF/TwistedTree_1.gltf', 'glTF/TwistedTree_2.gltf', 'glTF/TwistedTree_3.gltf',
+              'glTF/DeadTree_1.gltf', 'glTF/DeadTree_2.gltf', 'glTF/DeadTree_3.gltf',
+              'glTF/Bush_Common.gltf', 'glTF/Bush_Common_Flowers.gltf',
+              'glTF/Fern_1.gltf', 'glTF/Grass_Common_Short.gltf', 'glTF/Grass_Common_Tall.gltf',
+              'glTF/Grass_Wispy_Short.gltf', 'glTF/Grass_Wispy_Tall.gltf',
+              'glTF/Mushroom_Common.gltf', 'glTF/Mushroom_Laetiporus.gltf',
+              'glTF/Rock_Medium_1.gltf', 'glTF/Rock_Medium_2.gltf', 'glTF/Rock_Medium_3.gltf',
+              'glTF/Pebble_Round_1.gltf', 'glTF/Pebble_Round_2.gltf', 'glTF/Pebble_Round_3.gltf',
+              'glTF/Flower_3_Group.gltf', 'glTF/Flower_4_Group.gltf',
+              'glTF/Plant_1.gltf', 'glTF/Plant_7.gltf',
+          ]
+          copy_gltf_pack('assets/Stylized Nature MegaKit_Standard_.zip', nature, 'nature')
+
+          swords = [
+              'KayKit_FantasyWeaponsBits_1.0_FREE/Assets/gltf/sword_A.gltf',
+              'KayKit_FantasyWeaponsBits_1.0_FREE/Assets/gltf/sword_D.gltf',
+          ]
+          copy_gltf_pack('assets/KayKit_FantasyWeaponsBits_1.0_FREE.zip', swords, 'weapons')
+
+          chars = [
+              'Universal Base Characters[Standard]/Base Characters/Godot - UE/Superhero_Male_FullBody.gltf',
+              'Universal Base Characters[Standard]/Base Characters/Godot - UE/Superhero_Female_FullBody.gltf',
+          ]
+          copy_gltf_pack('assets/Universal Base Characters_Standard_.zip', chars, 'characters')
+
+          # Animation library with clips (idle / walk / attack).
+          with zipfile.ZipFile(root / 'assets/Universal Animation Library 2_Standard_(1).zip') as z:
+              src = 'Universal Animation Library 2[Standard]/Unreal-Godot/UAL2_Standard.glb'
+              dst = out / 'anim/UAL2_Standard.glb'
+              dst.parent.mkdir(parents=True, exist_ok=True)
+              dst.write_bytes(z.read(src))
+              print('animation glb:', dst.stat().st_size)
+
+          # A few medieval ruins for variety.
+          with zipfile.ZipFile(root / 'assets/Medieval Village MegaKit_Standard_.zip') as z:
+              candidates = [n for n in z.namelist() if n.endswith('.gltf') and 'glTF' in n]
+              for name in candidates[:6]:
+                  dst = out / 'ruins' / name
+                  dst.parent.mkdir(parents=True, exist_ok=True)
+                  dst.write_bytes(z.read(name))
+              print('ruins gltf:', len(candidates[:6]))
+          PY
+
       - name: Commit inventory to branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -288,7 +368,7 @@ jobs:
           git config user.name "arena-agent"
           git config user.email "agent@arena.ai"
           git checkout -B "$GITHUB_REF_NAME"
-          git add -f inspection inventory.json deep_inventory.json.gz game/assets
+          git add -f inspection inventory.json deep_inventory.json.gz game/assets game3d/models
           git commit -m "Add full asset inventory" || echo "No inventory changes"
           git push origin "HEAD:$GITHUB_REF_NAME"
 
