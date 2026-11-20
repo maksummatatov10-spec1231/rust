@@ -1,15 +1,17 @@
 # rust
 
-Игра **Forest Bloom** — логика на Rust → WebAssembly, рендер в браузере.
+Две игры на Rust → WebAssembly:
 
-- Игра: `game/` (см. `game/README.md`)
-- Анализ архива ассетов: `inventory.json`, `deep_inventory.json.gz`, `inspection/`
-- Workflow разбора архива через GitHub Actions: `.github/workflows/inspect-drive-assets.yml`
+- **Forest Bloom 3D** (`game3d/`) — полноценный 3D FPS: лес из glTF-ассетов, меч, волны врагов, меню, настройки, пауза. Готовый автономный HTML лежит в GitHub Release (`ForestBloom3D.html`).
+- **Forest Bloom** (`game/`) — ранняя 2D-версия на Canvas2D.
 
-Быстрый старт:
+Разбор архива ассетов: `inventory.json`, `deep_inventory.json.gz`, `inspection/`.
+Workflow для загрузки и разбора архива: `.github/workflows/inspect-drive-assets.yml`.
+
+Быстрый старт 3D-версии:
 
 ```bash
-cd game
+cd game3d
 ./build.sh
-python3 serve.py   # http://localhost:8080
+python3 serve.py   # http://localhost:8081
 ```

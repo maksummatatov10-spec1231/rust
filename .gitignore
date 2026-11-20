@@ -1,3 +1,5 @@
 /.rust-toolchain/
 /game/target/
+/game3d/target/
+/game3d/dist/
 /asset-analysis/

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Forest Bloom 3D — Rust + WebGL</title>
+<style>
+  :root { color-scheme: dark; font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #050806; color: #eaf7e8; }
+  #view { position: fixed; inset: 0; }
+  canvas { display: block; width: 100%; height: 100%; }
+  .overlay {
+    position: fixed; inset: 0; display: grid; place-items: center; z-index: 10;
+    background: radial-gradient(circle at 50% 30%, #163526e6, #030806f5 70%);
+    backdrop-filter: blur(6px);
+  }
+  .overlay.hidden { display: none; }
+  .panel {
+    width: min(540px, calc(100vw - 32px)); padding: 30px 34px; border-radius: 20px;
+    background: linear-gradient(#0d2019e8, #07130fe8); border: 1px solid #3a6b4f;
+    box-shadow: 0 30px 90px #000a, inset 0 1px #ffffff14;
+  }
+  .title { font-size: clamp(32px, 6vw, 58px); margin: 0; letter-spacing: -1px; line-height: 1.05; }
+  .title em { font-style: normal; color: #a6e882; }
+  .sub { color: #a9c8b1; margin: 10px 0 24px; line-height: 1.55; }
+  .btn-row { display: grid; gap: 10px; }
+  button {
+    font: inherit; font-weight: 650; cursor: pointer; padding: 12px 18px; border-radius: 12px;
+    border: 1px solid #4b8a64; background: #163f2b; color: #eaffe2; text-align: left;
+    transition: transform .08s ease, background .15s ease;
+  }
+  button:hover { background: #1e5640; transform: translateY(-1px); }
+  button.primary { background: linear-gradient(#a6e882, #63bf72); color: #082012; border: 0; font-weight: 800; text-align: center; }
+  button.primary:hover { filter: brightness(1.07); }
+  button.ghost { background: #0b1b14; }
+  .settings .row { display: grid; grid-template-columns: 1fr 130px; align-items: center; gap: 12px; margin: 12px 0; color: #bcd6c1; }
+  .settings input[type=range] { width: 100%; accent-color: #8fdc72; }
+  .settings select { width: 100%; padding: 7px; border-radius: 8px; background: #102a1c; color: #eaffea; border: 1px solid #376346; }
+  .settings input[type=checkbox] { width: 20px; height: 20px; accent-color: #8fdc72; justify-self: end; }
+  .keys { margin-top: 18px; font-size: 12px; color: #7fa38a; line-height: 1.7; }
+  #hud { position: fixed; inset: 0; pointer-events: none; z-index: 5; display: none; }
+  #hud.on { display: block; }
+  #crosshair {
+    position: absolute; left: 50%; top: 50%; width: 22px; height: 22px;
+    transform: translate(-50%, -50%);
+  }
+  #crosshair::before, #crosshair::after {
+    content: ''; position: absolute; background: #d9ffe0; box-shadow: 0 0 6px #000;
+  }
+  #crosshair::before { left: 10px; top: 0; width: 2px; height: 22px; }
+  #crosshair::after { top: 10px; left: 0; height: 2px; width: 22px; }
+  #hit {
+    position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0; transition: opacity .08s;
+  }
+  #hit::before, #hit::after { content: ''; position: absolute; background: #fff; }
+  #hit::before { left: 16px; top: 0; width: 2px; height: 34px; }
+  #hit::after { top: 16px; left: 0; height: 2px; width: 34px; }
+  #bars { position: absolute; left: 24px; bottom: 22px; width: 260px; }
+  .bar { height: 12px; border-radius: 8px; background: #02110a99; border: 1px solid #7fbf8b66; overflow: hidden; margin: 6px 0; }
+  .bar > i { display: block; height: 100%; width: 100%; transition: width .12s linear; }
+  #hpBar > i { background: linear-gradient(90deg, #d94f5c, #ff9a72); }
+  #stBar > i { background: linear-gradient(90deg, #4bb7d6, #9cf0c1); }
+  .labels { display: flex; justify-content: space-between; font-size: 11px; letter-spacing: .08em; color: #c6e0c9; text-shadow: 0 1px 3px #000; }
+  #stats { position: absolute; right: 22px; top: 18px; text-align: right; text-shadow: 0 2px 6px #000; }
+  #stats b { font-size: 30px; font-variant-numeric: tabular-nums; }
+  #stats div { color: #b9d8bf; font-size: 13px; }
+  #hint { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); font-size: 12px; color: #c9e5cc; text-shadow: 0 2px 5px #000; }
+  #vignette { position: fixed; inset: 0; pointer-events: none; z-index: 4; opacity: 0; transition: opacity .12s; background: radial-gradient(circle, transparent 45%, #c4243cbb 100%); }
+  #loading { position: fixed; inset: 0; display: grid; place-items: center; z-index: 30; background: #040b07; color: #b9e6bd; font-size: 18px; }
+  #loading.hidden { display: none; }
+  .credit { font-size: 11px; color: #6f9279; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div id="view"></div>
+
+<div id="hud">
+  <div id="crosshair"></div>
+  <div id="hit"></div>
+  <div id="bars">
+    <div class="labels"><span>ЗДОРОВЬЕ</span><span id="hpText">100</span></div>
+    <div class="bar" id="hpBar"><i></i></div>
+    <div class="labels"><span>ВЫНОСЛИВОСТЬ</span><span id="stText">100</span></div>
+    <div class="bar" id="stBar"><i></i></div>
+  </div>
+  <div id="stats"><b id="score">0</b><div id="waveLine">Волна 1 · врагов 0</div><div id="killLine">Убито 0 · 00:00</div></div>
+  <div id="hint">WASD — движение · ЛКМ — удар мечом · Shift — бег · Пробел — прыжок · Esc — пауза</div>
+</div>
+<div id="vignette"></div>
+<div id="loading">Загружаю лес и модели…</div>
+
+<div class="overlay" id="mainMenu">
+  <div class="panel">
+    <h1 class="title">Forest <em>Bloom 3D</em></h1>
+    <p class="sub">Первый взгляд, стальной клинок и оживший лес. Собери очки, переживи волны теней и найди грибы здоровья.</p>
+    <div class="btn-row">
+      <button class="primary" data-action="play">Начать игру</button>
+      <button data-action="settings">Настройки графики и управления</button>
+      <button class="ghost" data-action="about">Об игре</button>
+    </div>
+    <div class="keys">Управление: WASD · мышь · ЛКМ атака · Shift бег · Пробел прыжок · Esc пауза</div>
+    <div class="credit">Rust/WASM gameplay · Three.js renderer · assets from the supplied archive</div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="settingsMenu">
+  <div class="panel settings">
+    <h2 class="title" style="font-size:30px">Настройки</h2>
+    <div class="row"><label for="sens">Чувствительность мыши</label><input id="sens" type="range" min="0.0006" max="0.008" step="0.0002" value="0.0022"></div>
+    <div class="row"><label for="fov">Поле зрения</label><input id="fov" type="range" min="60" max="110" step="1" value="78"></div>
+    <div class="row"><label for="volume">Громкость</label><input id="volume" type="range" min="0" max="1" step="0.05" value="0.5"></div>
+    <div class="row"><label for="quality">Качество</label><select id="quality"><option value="0">Низкое</option><option value="1" selected>Среднее</option><option value="2">Высокое</option></select></div>
+    <div class="row"><label for="shadows">Тени</label><input id="shadows" type="checkbox" checked></div>
+    <div class="row"><label for="fog">Туман</label><input id="fog" type="checkbox" checked></div>
+    <div class="row"><label for="invert">Инвертировать ось Y</label><input id="invert" type="checkbox"></div>
+    <div class="btn-row" style="margin-top:20px">
+      <button class="primary" data-action="settingsBack">Применить и вернуться</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="pauseMenu">
+  <div class="panel">
+    <h2 class="title" style="font-size:34px">Пауза</h2>
+    <p class="sub">Лес подождёт. Нажмите Esc или «Продолжить», чтобы вернуться.</p>
+    <div class="btn-row">
+      <button class="primary" data-action="resume">Продолжить</button>
+      <button data-action="settings">Настройки</button>
+      <button class="ghost" data-action="menu">В главное меню</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="gameOver">
+  <div class="panel">
+    <h2 class="title" style="font-size:40px">Тени победили</h2>
+    <p class="sub" id="overText">Вы пали в лесу.</p>
+    <div class="btn-row">
+      <button class="primary" data-action="play">Сыграть ещё</button>
+      <button class="ghost" data-action="menu">Главное меню</button>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/GLTFLoader.js"></script>
+<script src="vendor/PointerLockControls.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
