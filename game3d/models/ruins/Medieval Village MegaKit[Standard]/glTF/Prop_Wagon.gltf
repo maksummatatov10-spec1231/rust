@@ -15,13 +15,13 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Balcony_Cross_Straight"
+			"name":"Prop_Wagon"
 		}
 	],
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"MI_WoodTrim",
+			"name":"MI_WoodTrim_Wear",
 			"normalTexture":{
 				"index":0
 			},
@@ -38,15 +38,16 @@
 	],
 	"meshes":[
 		{
-			"name":"Cube.111",
+			"name":"Cube.043",
 			"primitives":[
 				{
 					"attributes":{
 						"POSITION":0,
 						"NORMAL":1,
-						"TEXCOORD_0":2
+						"TEXCOORD_0":2,
+						"TEXCOORD_1":3
 					},
-					"indices":3,
+					"indices":4,
 					"material":0
 				}
 			]
@@ -87,61 +88,73 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":252,
+			"count":2331,
 			"max":[
-				1.0000003576278687,
-				1.1247994899749756,
-				1.1042530536651611
+				0.9720492362976074,
+				1.5323269367218018,
+				0.8735843896865845
 			],
 			"min":[
-				-1.0000003576278687,
-				-0.10508717596530914,
-				0.8979700207710266
+				-0.9793591499328613,
+				0.00312984362244606,
+				-3.1504321098327637
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":252,
+			"count":2331,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":252,
+			"count":2331,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
+			"componentType":5126,
+			"count":2331,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":4,
 			"componentType":5123,
-			"count":396,
+			"count":5016,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":3024,
+			"byteLength":27972,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":3024,
-			"byteOffset":3024,
+			"byteLength":27972,
+			"byteOffset":27972,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2016,
-			"byteOffset":6048,
+			"byteLength":18648,
+			"byteOffset":55944,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":792,
-			"byteOffset":8064,
+			"byteLength":18648,
+			"byteOffset":74592,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":10032,
+			"byteOffset":93240,
 			"target":34963
 		}
 	],
@@ -153,8 +166,8 @@
 	],
 	"buffers":[
 		{
-			"byteLength":8856,
-			"uri":"Balcony_Cross_Straight.bin"
+			"byteLength":103272,
+			"uri":"Prop_Wagon.bin"
 		}
 	]
 }
